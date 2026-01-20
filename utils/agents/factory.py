@@ -28,7 +28,7 @@ def create_agent(model: str, **kwargs) -> Agent:
     retry = SimpleRetry(
         max_attempts=kwargs.pop("max_attempts", 5), base=kwargs.pop("base", 60)
     )
-    max_output_tokens: int = kwargs.pop("max_output_tokens", 4096)
+    max_output_tokens: int = kwargs.pop("max_output_tokens", 2048)
 
     if provider == "openai":
         adapter = OpenAIAdapter(
@@ -45,7 +45,7 @@ def create_agent(model: str, **kwargs) -> Agent:
         adapter = LocalAdapter(
             base_url=kwargs.pop("base_url", "http://localhost:11434/v1"),
             model=model.removeprefix("local-"),
-            api_key=kwargs.pop("api_key", "123"),
+            api_key=kwargs.pop("api_key", os.getenv("OPENAI_API_KEY")),
         )
     else:
         raise ValueError(f"Unrecognized provider: {provider}")

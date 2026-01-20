@@ -20,7 +20,7 @@ if str(ROOT) not in sys.path:
 # ---------------------------------------------------------
 
 from maia_api import Synthetic_System, System
-from utils.agents.agent import BaseAgent as Agent
+from utils.agents.agent import Agent
 from utils.agents.factory import create_agent
 from utils.flux import FluxDev
 
@@ -84,7 +84,7 @@ def get_prompts(agent: Agent, instruction: str) -> list[str]:
 
 
 def generate_images(text2image: FluxDev, prompts: list[str]) -> list[Image]:
-    images = text2image.generate_batch(prompts, max_batch=15)
+    images = text2image.generate(prompts, batch_size=4)
     return images
 
 

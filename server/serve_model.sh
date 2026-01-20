@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Defaults
+# Defaults (can be overridden by environment variables)
 MODEL=""
 GPUS=1
 PORT=11434
 HOST="0.0.0.0"
-GPU_UTIL="0.90"
+GPU_UTIL="${GPU_UTIL:-0.80}"
 MAX_NUM_SEQS=1
+MAX_MODEL_LEN="${MAX_MODEL_LEN:-}"
 
 usage() {
   cat <<EOF
@@ -66,6 +67,7 @@ case "${MODEL}" in
       --max_num_seqs "${MAX_NUM_SEQS}"
       --served-model-name mistralai/Mistral-Small-3.2-24B
     )
+    [[ -n "${MAX_MODEL_LEN}" ]] && CMD+=(--max-model-len "${MAX_MODEL_LEN}")
     ;;
   gemma|Gemma)
     MODEL_ID="google/gemma-3-27b-it"
@@ -80,6 +82,7 @@ case "${MODEL}" in
       --enable-prefix-caching
       --max_num_seqs "${MAX_NUM_SEQS}"
     )
+    [[ -n "${MAX_MODEL_LEN}" ]] && CMD+=(--max-model-len "${MAX_MODEL_LEN}")
     ;;
   *)
     # Generic/default run with sensible defaults
@@ -95,6 +98,7 @@ case "${MODEL}" in
       --enable-prefix-caching
       --max_num_seqs "${MAX_NUM_SEQS}"
     )
+    [[ -n "${MAX_MODEL_LEN}" ]] && CMD+=(--max-model-len "${MAX_MODEL_LEN}")
     ;;
 esac
 

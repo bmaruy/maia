@@ -167,7 +167,7 @@ def interpretation_experiment(
     agent = create_agent(
         model=maia,
         max_attempts=5,
-        max_output_tokens=4096,
+        max_output_tokens=2048,
         **({'base_url': base_url} if 'local' in maia else {}),
     )
     round_count = 0
@@ -276,7 +276,7 @@ def main(args):
             system = Synthetic_System(unit, gt_label, layer, args.device)
         else:
             system = System(
-                unit, layer, args.model, args.device, net_dissect.thresholds
+                unit, layer, args.model, args.device, thresholds=net_dissect.thresholds
             )
 
         tools = Tools(
