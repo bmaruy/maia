@@ -123,6 +123,12 @@ def call_argparse():
         default=1,
         help='Chunk id to process (1 to chunks)',
     )
+    parser.add_argument(
+        '--perturbation-config',
+        type=str,
+        default=None,
+        help='Path to perturbation config file (YAML/JSON). If provided, applies perturbations before running.',
+    )
     args = parser.parse_args()
     return args
 
@@ -211,6 +217,19 @@ def main(args):
         raise ValueError(
             f'--chunk_id must be in [1, {args.total_chunks}], got {args.chunk_id}'
         )
+
+    # Apply perturbations if config provided
+    # Note: argparse converts --perturbation-config to args.perturbation_config
+    perturbation_applied = False
+    perturbation_config = getattr(args, 'perturbation_config', None)
+    if perturbation_config:
+        from perturbations import apply_perturbations
+        print(f"\n{'='*60}")
+        print("🔧 PERTURBATION MODE ENABLED")
+        print(f"{'='*60}")
+        apply_perturbations(perturbation_config)
+        perturbation_applied = True
+        print(f"{'='*60}\n")
 
     maia_api, user_query = return_prompt(args.path2prompts, setting=args.task)
 
@@ -305,6 +324,15 @@ def main(args):
         except Exception as e:
             print(e)
             break
+
+    # Restore original prompts if perturbations were applied
+    if perturbation_applied:
+        from perturbations import restore_originals
+        print(f"\n{'='*60}")
+        print("♻️  RESTORING ORIGINAL PROMPTS")
+        print(f"{'='*60}")
+        restore_originals()
+        print(f"{'='*60}\n")
 
 
 if __name__ == '__main__':

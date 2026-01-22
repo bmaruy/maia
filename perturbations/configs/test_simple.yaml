@@ -1,0 +1,11 @@
+# Simple test to verify perturbation system works
+# This adds a marker to the system prompt to confirm it was modified
+
+description: "Simple test - adds visible marker to system prompt"
+
+perturbations:
+  - file: "prompts/open/final.txt"
+    type: "full"
+    strategy: "append_text"
+    append: "\n\n[PERTURBATION TEST: This text was added by the perturbation system]"
+    description: "Add marker to final.txt to verify perturbation was applied"

@@ -1,0 +1,11 @@
+# Test: Remove a tool from the API documentation
+# This tests whether MAIA discovers tools are missing or tries to use them anyway
+
+description: "Remove edit_images tool from API to test tool usage patterns"
+
+perturbations:
+  - file: "prompts/open/api.txt"
+    type: "full"
+    strategy: "remove_tool_documentation"
+    tool_name: "edit_images"
+    description: "Remove edit_images() from API documentation"

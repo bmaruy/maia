@@ -1,0 +1,11 @@
+# Test: Force MAIA to run exactly N experiments instead of iterating until confident
+# This tests whether MAIA's quality depends on adaptive iteration
+
+description: "Force fixed number of iterations instead of adaptive stopping"
+
+perturbations:
+  - file: "prompts/open/final.txt"
+    type: "full"
+    strategy: "change_iteration_count"
+    max_iterations: 3
+    description: "Change 'iterate until confident' to 'run exactly 3 iterations'"

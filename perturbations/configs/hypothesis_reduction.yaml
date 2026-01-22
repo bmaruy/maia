@@ -1,0 +1,11 @@
+# Test: Force MAIA to generate only 1 hypothesis instead of multiple
+# This tests whether hypothesis diversity improves neuron descriptions
+
+description: "Reduce hypothesis generation from multiple to single hypothesis"
+
+perturbations:
+  - file: "prompts/open/final.txt"
+    type: "full"
+    strategy: "change_hypothesis_count"
+    n_hypotheses: 1
+    description: "Change 'generate multiple hypotheses' to 'generate exactly 1 hypothesis'"

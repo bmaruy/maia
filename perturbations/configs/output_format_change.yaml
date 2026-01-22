@@ -1,0 +1,15 @@
+# Test: Change output format markers ([DESCRIPTION] -> [NEURON_DESCRIPTION], etc.)
+# This tests whether MAIA relies on exact format markers or generalizes
+
+description: "Change output format markers to test format generalization"
+
+perturbations:
+  - file: "prompts/open/user_neuron_description.txt"
+    type: "full"
+    strategy: "corrupt_output_format"
+    description: "Change [DESCRIPTION] to [NEURON_DESCRIPTION] and [LABEL] to [TAGS]"
+
+  - file: "prompts/open/final.txt"
+    type: "full"
+    strategy: "corrupt_output_format"
+    description: "Change all output format markers in final.txt"

@@ -1,0 +1,26 @@
+# Test: Inject typos into prompts to test LLM robustness
+# This tests whether modern LLMs can handle OCR-style errors
+
+description: "Inject 5% typo rate into all prompt files"
+
+perturbations:
+  - file: "prompts/open/api.txt"
+    type: "full"
+    strategy: "inject_typos"
+    rate: 0.05
+    seed: 42
+    description: "Add typos to API documentation"
+
+  - file: "prompts/open/final.txt"
+    type: "full"
+    strategy: "inject_typos"
+    rate: 0.05
+    seed: 43
+    description: "Add typos to workflow instructions"
+
+  - file: "prompts/open/user_neuron_description.txt"
+    type: "full"
+    strategy: "inject_typos"
+    rate: 0.05
+    seed: 44
+    description: "Add typos to output format instructions"

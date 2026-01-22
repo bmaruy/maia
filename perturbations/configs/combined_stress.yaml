@@ -1,0 +1,29 @@
+# Test: Combine multiple perturbations to stress test MAIA
+# This tests robustness to multiple simultaneous changes
+
+description: "Combined stress test - multiple perturbations at once"
+
+perturbations:
+  - file: "prompts/open/final.txt"
+    type: "full"
+    strategy: "change_iteration_count"
+    max_iterations: 2
+    description: "Limit to 2 iterations"
+
+  - file: "prompts/open/final.txt"
+    type: "full"
+    strategy: "change_hypothesis_count"
+    n_hypotheses: 1
+    description: "Limit to 1 hypothesis"
+
+  - file: "prompts/open/api.txt"
+    type: "full"
+    strategy: "inject_typos"
+    rate: 0.03
+    seed: 100
+    description: "Add 3% typos to API"
+
+  - file: "prompts/open/user_neuron_description.txt"
+    type: "full"
+    strategy: "corrupt_output_format"
+    description: "Change output format markers"
