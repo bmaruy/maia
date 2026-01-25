@@ -14,6 +14,6 @@ Usage:
     restore_originals()
 """
 
-from .perturber import apply_perturbations, restore_originals
+from .perturber import apply_perturbations, restore_originals, clean_backups
 
-__all__ = ['apply_perturbations', 'restore_originals']
+__all__ = ['apply_perturbations', 'restore_originals', 'clean_backups']

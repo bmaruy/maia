@@ -13,7 +13,7 @@ from pathlib import Path
 # Add parent to path so we can import perturbations
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from perturbations import apply_perturbations, restore_originals, clean_backups
+from perturbations import apply_perturbations, restore_originals
 
 
 def test_simple_perturbation():
